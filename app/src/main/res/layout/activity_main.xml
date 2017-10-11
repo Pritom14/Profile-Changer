@@ -36,6 +36,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:hint="@string/set_password"
+            android:inputType="textPassword"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:theme="@style/TextInputLayoutTheme" />
     </android.support.design.widget.TextInputLayout>
