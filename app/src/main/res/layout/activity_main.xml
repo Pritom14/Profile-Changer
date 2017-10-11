@@ -1,24 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:id="@+id/MainLayout"
-    >
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/setPassEditId"
-        android:layout_marginTop="50dp"
-        android:hint="Set password"
-        android:textColor="#000000"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarTheme"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="200dp"
+        android:background="?colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:subtitle="@string/toolbar_subtitle"
+        app:title="@string/toolbar_title" />
 
-    <Button
-        android:id="@+id/submitButtonId"
-        android:text="Submit"
-        android:layout_below="@+id/setPassEditId"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_width="80dp"
-        android:layout_height="50dp" />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/set_password_text_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:passwordToggleEnabled="true">
 
-</RelativeLayout>
+        <android.support.v7.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/set_password"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:theme="@style/TextInputLayoutTheme" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/submit_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/set_password_text_input_layout"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_save_black"
+        android:drawablePadding="16dp"
+        android:drawableStart="@drawable/ic_save_black"
+        android:gravity="start|center_vertical"
+        android:text="@string/save"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:theme="@style/ButtonTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_password_text_input_layout"
+        app:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>
