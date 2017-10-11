@@ -4,4 +4,7 @@
     <string name="toolbar_subtitle">Change ringer profiles using SMS</string>
     <string name="set_password">Set Password</string>
     <string name="save">Save</string>
+    <string name="password_saved">Password saved successfully</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="grant">Grant</string>
 </resources>

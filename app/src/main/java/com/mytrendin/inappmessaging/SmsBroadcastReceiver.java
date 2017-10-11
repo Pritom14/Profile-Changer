@@ -12,49 +12,49 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class SmsBroadcastReceiver extends BroadcastReceiver {
-    public AudioManager audioManager;
-    SharedPreferences sharedPreferences;
-    boolean b = false;
-    String smsBody;
-    final int REQUEST_CODE_ASK_PERMISSIONS = 123;
-
-    public static final String SMS_BUNDLE = "pdus";
-
-    SmsMessage smsMessage;
+    private static final String KEY_FORMAT = "format";
+    private static final String SMS_BUNDLE = "pdus";
+    private String smsBody, smsMessage;
 
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context.getApplicationContext(), "Toast Long", Toast.LENGTH_LONG).show();
 
-
-        sharedPreferences = context.getApplicationContext().getSharedPreferences("Pritom", context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         Bundle intentExtras = intent.getExtras();
-        String format = intentExtras.getString("format");
-        if (intentExtras != null) {
-            Object[] sms = (Object[]) intentExtras.get(SMS_BUNDLE);
-            String smsMessageStr = "";
-            String pass3 = sharedPreferences.getString("password", null);
-            for (int i = 0; i < sms.length; ++i) {
+        String format = intentExtras.getString(KEY_FORMAT);
+        Object[] sms = (Object[]) intentExtras.get(SMS_BUNDLE);
+        String storedPassword = sharedPreferences.getString(MainActivity.KEY_PASSWORD, null);
+        for (Object sm : sms) {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-                    smsMessage = SmsMessage.createFromPdu((byte[]) sms[i], format);
-                } else {
-                    smsMessage = SmsMessage.createFromPdu((byte[]) sms[i]);
-                }
-                smsBody = smsMessage.getMessageBody().toString();
-                String address = smsMessage.getOriginatingAddress();
-
-                smsMessageStr += "SMS From: " + address + "\n";
-                smsMessageStr += smsBody + "\n";
+            SmsMessage mSmsMessage;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mSmsMessage = SmsMessage.createFromPdu((byte[]) sm, format);
+            } else {
+                mSmsMessage = SmsMessage.createFromPdu((byte[]) sm);
             }
-            if (smsBody.equals("@general" + pass3)) {
+            smsBody = mSmsMessage.getMessageBody();
+            String address = mSmsMessage.getOriginatingAddress();
+
+            smsMessage = "SMS From: " + address + "\n" + smsBody + "\n";
+
+            String[] smsSplit = smsBody.split(" ");
+            if (smsSplit[1].equals(storedPassword)) {
                 AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-                audioManager.setRingerMode(audioManager.RINGER_MODE_NORMAL);
+                switch (smsSplit[0]) {
+                    case "@normal":
+                        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                        break;
+                    case "@vibrate":
+                        audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                        break;
+                    case "@silent":
+                        audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                        break;
+                }
             }
-            Toast.makeText(context, "SMS : " + smsBody + pass3, Toast.LENGTH_SHORT).show();
-            Log.d("Message:", smsBody + pass3);
-
-
+        }
+        if (BuildConfig.DEBUG) {
+            Toast.makeText(context, "SMS : " + smsMessage + storedPassword, Toast.LENGTH_SHORT).show();
+            Log.d("Message:", smsMessage + storedPassword);
         }
     }
 }
