@@ -37,7 +37,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
             smsMessage = "SMS From: " + address + "\n" + smsBody + "\n";
 
             String[] smsSplit = smsBody.split(" ");
-            if (smsSplit[1].equals(storedPassword)) {
+            if (smsSplit.length > 1 && smsSplit[1].equals(storedPassword)) {
                 AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
                 switch (smsSplit[0]) {
                     case "@normal":
