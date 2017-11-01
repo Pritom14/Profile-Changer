@@ -1,6 +1,17 @@
 language: android
 jdk:
   - oraclejdk8
+
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-preview-license'
+    - 'android-sdk-license-.+'
+    - 'android-sdk-license'
+    - 'google-gdk-license-.+'
+    
+android:
+  components:
+    - build-tools-25.0.1
  
 before_install:
  - chmod +x gradlew
