@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -14,18 +15,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int RECEIVE_SMS_REQUEST_ID = 99;
     public static final String KEY_PASSWORD = "password";
+    private static final int RECEIVE_SMS_REQUEST_ID = 99;
+    SmsBroadcastReceiver receiver = new SmsBroadcastReceiver();
     private SharedPreferences mSharedPreferences;
     private View mView;
-
-    SmsBroadcastReceiver receiver = new SmsBroadcastReceiver();
 
     @Override
     public void onStart() {
@@ -113,5 +115,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onHowToUseClick(View mView) {
+        LinearLayout llHowToUse = findViewById(R.id.llHowToUse);
+        LinearLayout llSetPassword = findViewById(R.id.llSetPassword);
+        TextView tvHowToUse = findViewById(R.id.tvHowToUse);
+        TextView tvSetPassword = findViewById(R.id.tvSetPassword);
+        tvSetPassword.setTextColor(Color.BLACK);
+        tvHowToUse.setTextColor(Color.parseColor("#ff669900"));
+        llHowToUse.setVisibility(View.VISIBLE);
+        llSetPassword.setVisibility(View.GONE);
 
+    }
+
+    public void onSetPasswordClick(View mView) {
+        LinearLayout llHowToUse = findViewById(R.id.llHowToUse);
+        LinearLayout llSetPassword = findViewById(R.id.llSetPassword);
+        TextView tvHowToUse = findViewById(R.id.tvHowToUse);
+        TextView tvSetPassword = findViewById(R.id.tvSetPassword);
+        tvSetPassword.setTextColor(Color.parseColor("#ff669900"));
+        tvHowToUse.setTextColor(Color.BLACK);
+        llHowToUse.setVisibility(View.GONE);
+        llSetPassword.setVisibility(View.VISIBLE);
+
+    }
 }

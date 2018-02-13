@@ -17,7 +17,7 @@
 
     <style name="ToolbarTheme">
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
-        <item name="titleMarginTop">144dp</item>
+
         <item name="android:background">?colorPrimary</item>
         <item name="android:elevation">4dp</item>
     </style>
