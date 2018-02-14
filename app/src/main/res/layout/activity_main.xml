@@ -1,66 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#e1e1e1">
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/ToolbarTheme"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:background="?colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:subtitle="@string/toolbar_subtitle"
         app:title="@string/toolbar_title" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/set_password_text_input_layout"
+    <LinearLayout
+        android:id="@+id/llDescription"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="5dp">
+
+        <TextView
+            android:id="@+id/textViewAppName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textViewAppDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/toolbar_subtitle"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="?android:attr/colorPressedHighlight"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llOptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:passwordToggleEnabled="true">
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@id/llDescription"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="10dp">
 
-        <android.support.v7.widget.AppCompatEditText
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:elevation="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="7">
+
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:onClick="onHowToUseClick"
+                    android:padding="10dp"
+                    android:tint="@color/colorAccent"
+                    app:srcCompat="@drawable/ic_info" />
+
+                <TextView
+                    android:id="@+id/tvHowToUse"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:onClick="onHowToUseClick"
+                    android:text="How To Use"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:elevation="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="7">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:onClick="onSetPasswordClick"
+                    android:padding="10dp"
+                    android:tint="@color/colorAccent"
+                    app:srcCompat="@drawable/ic_password" />
+
+                <TextView
+                    android:id="@+id/tvSetPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:onClick="onSetPasswordClick"
+                    android:text="Set Password"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llHowToUse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/background_light"
+        android:orientation="vertical"
+
+        app:layout_constraintTop_toBottomOf="@id/llOptions">
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/how_to_use"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSetPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/background_light"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/llOptions"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="10dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/set_password_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:hint="@string/set_password"
-            android:inputType="textPassword"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:theme="@style/TextInputLayoutTheme" />
-    </android.support.design.widget.TextInputLayout>
+            android:visibility="visible"
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/submit_button"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/set_password_text_input_layout"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/ic_save_black"
-        android:drawablePadding="16dp"
-        android:drawableStart="@drawable/ic_save_black"
-        android:gravity="start|center_vertical"
-        android:text="@string/save"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:theme="@style/ButtonTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_password_text_input_layout"
-        app:layout_constraintVertical_bias="0.0" />
+            app:passwordToggleEnabled="true">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:hint="@string/set_password"
+                android:inputType="textPassword"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:theme="@style/TextInputLayoutTheme"
+                android:visibility="visible" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/submit_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_save_black"
+            android:drawablePadding="16dp"
+            android:drawableStart="@drawable/ic_save_black"
+            android:gravity="start|center_vertical"
+            android:text="@string/save"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:theme="@style/ButtonTheme"
+            android:visibility="visible" />
+    </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>

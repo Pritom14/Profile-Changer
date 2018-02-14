@@ -2,6 +2,14 @@
     <string name="app_name">Profile Changer</string>
     <string name="toolbar_title">@string/app_name</string>
     <string name="toolbar_subtitle">Change ringer profiles using SMS</string>
+    <string name="how_to_use">1)Click on the Set Password, enter password in below textbox and click on save.(remember password)\n\n
+        2)SMS Format: profile_code password\n\n
+        3)Profile Codes:\n
+            \t\t\tNormal:@normal\n
+            \t\t\tSilent:@silent\n
+            \t\t\tVibrate:@vibrate\n\n
+        4)Password:the password you set earlier.
+    </string>
     <string name="set_password">Set Password</string>
     <string name="save">Save</string>
     <string name="password_saved">Password saved successfully</string>
