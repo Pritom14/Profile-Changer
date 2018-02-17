@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
@@ -17,16 +18,24 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
     private static final String SMS_BUNDLE = "pdus";
     private String smsBody, smsMessage;
 
-    public static boolean setBluetooth(boolean enable) {
+    public static void setBluetooth(boolean enable) {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         boolean isEnabled = bluetoothAdapter.isEnabled();
         if (enable && !isEnabled) {
-            return bluetoothAdapter.enable();
+            bluetoothAdapter.enable();
         } else if (!enable && isEnabled) {
-            return bluetoothAdapter.disable();
+            bluetoothAdapter.disable();
         }
-        // No need to change bluetooth state
-        return true;
+    }
+
+    public static void setWifi(Context context, boolean enable) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        boolean isEnabled = wifiManager.isWifiEnabled();
+        if (enable && !isEnabled) {
+            wifiManager.setWifiEnabled(true);
+        } else if (!enable && isEnabled) {
+            wifiManager.setWifiEnabled(false);
+        }
     }
 
     public void onReceive(Context context, Intent intent) {
@@ -68,6 +77,15 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                     case "@bluetoothon":
                         setBluetooth(true);
                         break;
+
+                    case "@wifioff":
+                        setWifi(context, false);
+                        break;
+                    case "@wifion":
+                        setWifi(context, true);
+                        break;
+
+
                 }
             }
         }
@@ -76,4 +94,5 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
             Log.d("Message:", smsMessage + storedPassword);
         }
     }
+
 }
