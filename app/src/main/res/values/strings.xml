@@ -7,7 +7,11 @@
         3)Profile Codes:\n
             \t\t\tNormal:@normal\n
             \t\t\tSilent:@silent\n
-            \t\t\tVibrate:@vibrate\n\n
+            \t\t\tVibrate:@vibrate\n
+            \t\t\tWifi On:@wifion\n
+            \t\t\tWifi Off:@wifioff\n
+            \t\t\tBluetooth On:@bluetoothon\n
+            \t\t\tBluetooth Off:@bluetoothoff\n\n
         4)Password:the password you set earlier.
     </string>
     <string name="set_password">Set Password</string>
