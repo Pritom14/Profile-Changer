@@ -166,9 +166,12 @@
         app:layout_constraintTop_toBottomOf="@id/llOptions">
 
         <TextView
+            android:id="@+id/tvInstructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="10"
             android:padding="10dp"
+            android:scrollbars="vertical"
             android:text="@string/how_to_use"
             android:textSize="16sp" />
     </LinearLayout>

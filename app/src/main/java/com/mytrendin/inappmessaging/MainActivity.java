@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView tvInstructions = findViewById(R.id.tvInstructions);
+        tvInstructions.setMovementMethod(new ScrollingMovementMethod());
 
         final TextInputLayout passwordTextInputLayout = findViewById(R.id.set_password_text_input_layout);
         AppCompatButton submitButton = findViewById(R.id.submit_button);
