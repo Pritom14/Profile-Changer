@@ -1,5 +1,6 @@
 package com.mytrendin.inappmessaging;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,18 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
     private static final String KEY_FORMAT = "format";
     private static final String SMS_BUNDLE = "pdus";
     private String smsBody, smsMessage;
+
+    public static boolean setBluetooth(boolean enable) {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        boolean isEnabled = bluetoothAdapter.isEnabled();
+        if (enable && !isEnabled) {
+            return bluetoothAdapter.enable();
+        } else if (!enable && isEnabled) {
+            return bluetoothAdapter.disable();
+        }
+        // No need to change bluetooth state
+        return true;
+    }
 
     public void onReceive(Context context, Intent intent) {
 
@@ -48,6 +61,12 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                         break;
                     case "@silent":
                         audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                        break;
+                    case "@bluetoothoff":
+                        setBluetooth(false);
+                        break;
+                    case "@bluetoothon":
+                        setBluetooth(true);
                         break;
                 }
             }
