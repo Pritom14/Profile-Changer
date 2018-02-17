@@ -77,15 +77,12 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                     case "@bluetoothon":
                         setBluetooth(true);
                         break;
-
                     case "@wifioff":
                         setWifi(context, false);
                         break;
                     case "@wifion":
                         setWifi(context, true);
                         break;
-
-
                 }
             }
         }
